@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Nova flowPass</title>
+<link rel="stylesheet" href="panel.css">
+</head>
+<body>
+<main class="app-container">
+  <!-- Multi-layered ambient lighting -->
+  <div class="ambient-glow-left" aria-hidden="true"></div>
+  <div class="ambient-glow-right" aria-hidden="true"></div>
+
+  <div id="update-notice" class="card update-notice" role="status" aria-live="polite" hidden>
+    <span class="update-notice-indicator" aria-hidden="true"></span>
+    <span>Update Available</span>
+  </div>
+
+  <!-- Header Section -->
+  <header class="app-header">
+    <div class="brand-wrap">
+      <div class="brand-icon-box">
+        <img class="brand-icon" src="assets/icon.png" alt="NovaShop N" width="24" height="27">
+      </div>
+      <div class="brand-text">
+        <div class="brand-title-row">
+          <img class="brand-logotype" src="assets/logo-type.png" alt="FlowPass" height="19">
+          <span class="version-badge">v1.1.5</span>
+        </div>
+        <span class="brand-caption">Flow is not available By Pass</span>
+      </div>
+    </div>
+    <a href="https://www.novapluset.com/#features" target="_blank" rel="noopener noreferrer" class="icon-link-btn" title="Features & Guide" aria-label="Features and Guide">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <path d="M12 16v-4"></path>
+        <path d="M12 8h.01"></path>
+      </svg>
+    </a>
+  </header>
+
+  <!-- Hero Status Card -->
+  <section id="status-card" class="card hero-status-card" data-state="idle">
+    <div class="status-top-bar">
+      <span class="status-eyebrow">ENGINE STATE</span>
+      <div class="status-pill status-pill--idle">
+        <span class="status-ping" aria-hidden="true"></span>
+        <span class="status-dot"></span>
+        <span class="status-pill-text">CHECKING</span>
+      </div>
+    </div>
+
+    <div class="status-body">
+      <h2 id="status-title" class="status-title">Checking status…</h2>
+      <p id="status-desc" class="status-desc">Connecting to helper script…</p>
+      
+      <!-- Compatibility anchor for legacy scripts -->
+      <div id="status" class="legacy-status-anchor" aria-hidden="true">
+        <span class="status-dot"></span>
+        <span class="status-text"></span>
+      </div>
+    </div>
+
+    <!-- Toggle Island -->
+    <div class="toggle-island">
+      <div class="toggle-info">
+        <span class="toggle-title">Protection Engine</span>
+      </div>
+      <button id="toggle" class="switch" role="switch" aria-checked="false" aria-label="Enable Protection Engine" disabled>
+        <span class="switch-track">
+          <span class="switch-thumb"></span>
+        </span>
+      </button>
+    </div>
+  </section>
+
+  <section class="card license-card" aria-labelledby="license-title">
+    <div class="license-heading">
+      <div>
+        <h2 id="license-title" class="license-title">License</h2>
+        <p id="license-status" class="license-status">Connecting and checking trial eligibility…</p>
+      </div>
+      <span id="license-state-badge" class="license-state-badge" hidden aria-live="polite">
+        <span class="license-state-icon" aria-hidden="true">✓</span>
+        <span class="license-state-label">ACTIVE</span>
+      </span>
+    </div>
+    <section id="license-countdown" class="license-countdown" aria-label="License time remaining" hidden>
+      <div class="countdown-package-row">
+        <span id="countdown-package" class="countdown-package">FREE TRIAL PACKAGE</span>
+      </div>
+      <div class="countdown-time-panel">
+        <span class="countdown-time-title">TIME</span>
+        <div class="countdown-units" role="timer" aria-live="off">
+          <div class="countdown-unit">
+            <span id="countdown-primary" class="countdown-value">00</span>
+            <span id="countdown-primary-label" class="countdown-label">MINS</span>
+          </div>
+          <span class="countdown-colon" aria-hidden="true">:</span>
+          <div class="countdown-unit countdown-unit--secondary">
+            <span id="countdown-secondary" class="countdown-value">00</span>
+            <span id="countdown-secondary-label" class="countdown-label">SECS</span>
+          </div>
+        </div>
+        <div
+          id="countdown-progress"
+          class="countdown-progress"
+          role="progressbar"
+          aria-label="License time remaining"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="100">
+          <span id="countdown-progress-fill" class="countdown-progress-fill"></span>
+        </div>
+      </div>
+    </section>
+    <a class="btn btn-secondary activation-key-link" href="https://www.novapluset.com/#check-key"
+      target="_blank" rel="noopener noreferrer">
+      <span>Get Activation Key</span>
+      <svg class="btn-icon" width="13" height="13" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        aria-hidden="true">
+        <path d="M7 17 17 7"></path>
+        <path d="M7 7h10v10"></path>
+      </svg>
+    </a>
+    <form id="license-form" class="license-controls">
+      <label class="visually-hidden" for="license-key">License or trial key</label>
+      <input id="license-key" name="key" type="password" autocomplete="off" spellcheck="false"
+        placeholder="Enter Key" required>
+      <button id="activate" class="btn btn-secondary" type="submit">Activate</button>
+    </form>
+  </section>
+
+  <!-- Action Controls -->
+  <div class="actions-group">
+    <button id="open" class="btn btn-primary" type="button" title="Activate a key to open Google Flow" disabled>
+      <svg class="btn-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+        <polyline points="15 3 21 3 21 9"></polyline>
+        <line x1="10" y1="14" x2="21" y2="3"></line>
+      </svg>
+      <span>Open Flow</span>
+    </button>
+    <button id="reload" class="btn btn-secondary" type="button" title="Reload Current Tab" hidden disabled>
+      <svg class="btn-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"></path>
+      </svg>
+      <span>Reload Tab</span>
+    </button>
+  </div>
+  <a class="btn btn-secondary website-button" href="https://www.novapluset.com"
+    target="_blank" rel="noopener noreferrer">
+    <svg class="btn-icon" width="14" height="14" viewBox="0 0 24 24" fill="none"
+      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      aria-hidden="true">
+      <circle cx="12" cy="12" r="10"></circle>
+      <path d="M2 12h20"></path>
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+    </svg>
+    <span>Our Website</span>
+  </a>
+
+  <!-- Error Notification Banner (Conditional) -->
+  <div id="error-box" class="error-banner" hidden>
+    <svg class="error-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"></circle>
+      <line x1="12" y1="8" x2="12" y2="12"></line>
+      <line x1="12" y1="16" x2="12.01" y2="16"></line>
+    </svg>
+    <span id="error" class="error-text" role="alert"></span>
+  </div>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="footer-meta">
+      <svg class="footer-shield" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+      </svg>
+      <span>Powered By • Novapluset</span>
+    </div>
+    <a href="https://www.novapluset.com" target="_blank" rel="noopener noreferrer" class="footer-link">
+      www.novapluset.com
+    </a>
+  </footer>
+</main>
+<script src="panel.js"></script>
+</body>
+</html>
